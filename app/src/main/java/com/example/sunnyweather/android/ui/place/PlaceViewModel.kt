@@ -18,7 +18,6 @@ class PlaceViewModel : ViewModel() {
 
     fun searchPlaces(query :String){
         searchLiveData.value=query;
-
     }
 
 }
