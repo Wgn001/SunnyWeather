@@ -10,6 +10,7 @@ import java.lang.RuntimeException
 object Repository{
     fun searchPlaces(query:String) = liveData(Dispatchers.IO) {
         val result=try{
+            //请求网络数据
         val placeResponse =SunnyWeatherNetwork.searchPlaces(query)
         if (placeResponse.status=="ok"){
             val places=placeResponse.places
@@ -20,6 +21,8 @@ object Repository{
     }catch (e:Exception){
             Result.failure<List<Place>>(e)
         }
+
+        //发射结果
         emit(result)
     }
 }

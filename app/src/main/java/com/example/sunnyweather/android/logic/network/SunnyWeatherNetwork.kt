@@ -10,8 +10,11 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 object SunnyWeatherNetwork{
+
+    //接口动态代理对象
     private val placeService=ServiceCreator.create(PlaceService::class.java)
 
+    //协程请求网络
     suspend fun searchPlaces(query:String) = placeService.searchPlace(query).await()
 
     private suspend fun <T> Call<T>.await() :T{

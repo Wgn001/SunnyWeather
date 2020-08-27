@@ -8,6 +8,7 @@ import com.example.sunnyweather.android.logic.model.Place
 
 class PlaceViewModel : ViewModel() {
 
+    //注册ViewModel
     private val searchLiveData =MutableLiveData<String>()
 
     val placelist=ArrayList<Place>()
