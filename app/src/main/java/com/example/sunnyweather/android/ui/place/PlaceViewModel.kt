@@ -8,6 +8,13 @@ import com.example.sunnyweather.android.logic.model.Place
 
 class PlaceViewModel : ViewModel() {
 
+
+    fun savePlace(place: Place)=Repository.savePlace(place)
+
+    fun getSavePlace()=Repository.getSavePlace()
+
+    fun isPlaceSaved()=Repository.isPlaceSaved()
+
     //注册ViewModel
     private val searchLiveData =MutableLiveData<String>()
 
