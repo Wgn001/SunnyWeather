@@ -1,5 +1,6 @@
 package com.example.sunnyweather.android.logic
 
+import android.content.Context
 import androidx.lifecycle.liveData
 import com.example.sunnyweather.android.logic.model.Place
 import com.example.sunnyweather.android.logic.model.Weather
@@ -9,11 +10,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import java.lang.Exception
 import java.lang.RuntimeException
+import java.nio.file.attribute.AclEntryPermission
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.ln
 
 object Repository{
-    fun searchPlaces(query:String) = liveData(Dispatchers.IO) {
-        val result=try{
+    fun searchPlaces(query:String) = fire(Dispatchers.IO) {
             //请求网络数据
         val placeResponse =SunnyWeatherNetwork.searchPlaces(query)
         if (placeResponse.status=="ok"){
@@ -22,17 +24,10 @@ object Repository{
         }else{
             Result.failure(RuntimeException("response status is ${placeResponse.status}"))
         }
-    }catch (e:Exception){
-            Result.failure<List<Place>>(e)
-        }
-
-        //发射结果
-        emit(result)
     }
 
 
-    fun refreWeather(lng:String,lat:String)= liveData(Dispatchers.IO) {
-        val result=try {
+    fun refreWeather(lng:String,lat:String)= fire(Dispatchers.IO) {
             coroutineScope {
                 val deferredRealtime=async {
                     SunnyWeatherNetwork.getRealtimeWeather(lng,lat)
@@ -42,7 +37,7 @@ object Repository{
                     SunnyWeatherNetwork.getDailyWeather(lng,lat)
                 }
 
-                val realtimeResponse=deferredRealtime.await();
+                val realtimeResponse=deferredRealtime.await()
                 val dailyResponse=deferredDaily.await()
 
                 if (realtimeResponse.status=="ok" && dailyResponse.status=="ok"){
@@ -56,11 +51,17 @@ object Repository{
                     ))
                 }
             }
-        }catch (e:Exception){
-            e.printStackTrace()
-        }
-        emit(result)
+    }
 
+
+    private fun <T> fire(context:CoroutineContext,block:suspend() -> Result<T>)=liveData<Result<T>>(context){
+        val result = try {
+            block()
+        }catch (e:Exception){
+            Result.failure<T>(e)
+        }
+
+        emit(result)
     }
 
 }
