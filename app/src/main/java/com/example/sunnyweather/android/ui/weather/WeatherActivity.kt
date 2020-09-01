@@ -1,6 +1,7 @@
 package com.example.sunnyweather.android.ui.weather
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,9 +22,9 @@ import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.forecast.*
 import kotlinx.android.synthetic.main.life_index.*
 import kotlinx.android.synthetic.main.now.*
-import kotlinx.android.synthetic.main.place_item.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -31,6 +32,9 @@ class WeatherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val decorView=window.decorView
+        decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.statusBarColor= Color.TRANSPARENT
         setContentView(R.layout.activity_weather)
         if (viewModel.locationLng.isEmpty()){
             viewModel.locationLng=intent.getStringExtra("location_lng") ?:""
@@ -56,7 +60,7 @@ class WeatherActivity : AppCompatActivity() {
         })
         swipeRefresh.setColorSchemeColors(R.color.colorPrimary)
         refreshWeather()
-        swipeRefresh.setOnClickListener {
+        swipeRefresh.setOnRefreshListener {
             refreshWeather()
         }
 
@@ -89,7 +93,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun showWeatherInfo(weather:Weather){
-//        placeName.text=viewModel.placeName
+        placeName.text=viewModel.placeName
         val realtime=weather.realtime
         val daily=weather.daily
         val currentTempText="${realtime.temperature.toInt()} °C"
@@ -97,7 +101,7 @@ class WeatherActivity : AppCompatActivity() {
         currentSky.text= getSky(realtime.skycon).info
         val currenPM25Text="空气指数 ${realtime.airQuaity.aqi.chn.toInt()}"
         currentAQI.text=currenPM25Text
-        currentAQI.setBackgroundResource(getSky(realtime.skycon).bg)
+        nowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
         forecastLayout.removeAllViews()
         val days=daily.skycon.size
         for (i in 0 until days){
