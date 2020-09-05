@@ -1,12 +1,12 @@
 package com.example.sunnyweather.android.ui.weather
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.sunnyweather.R
 import com.example.sunnyweather.android.logic.model.Weather
 import com.example.sunnyweather.android.logic.model.getSky
+import com.example.sunnyweather.android.ui.shop.ShopActivity
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.forecast.*
 import kotlinx.android.synthetic.main.life_index.*
@@ -67,6 +68,11 @@ class WeatherActivity : AppCompatActivity() {
         viewModel.refreshWeather(viewModel.locationLng,viewModel.locationLat)
 
         navBtn.setOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
+
+        shop.setOnClickListener {
+            this.startActivity(Intent(this, ShopActivity::class.java))
+        }
+
 
         drawerLayout.addDrawerListener(object :DrawerLayout.DrawerListener{
             override fun onDrawerStateChanged(newState: Int) {
