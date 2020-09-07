@@ -20,7 +20,6 @@ class ShopActivity : AppCompatActivity() {
         toolbar.title="商店"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.setNavigationIcon(R.drawable.icon_back)
-//        toolbar.inflateMenu(R.menu.menu_shop)
         setSupportActionBar(toolbar)
         viewpager.adapter=ShopFragmentAdapter(supportFragmentManager, listOf("","","","",""))
         slidingtablayout.setViewPager(viewpager, arrayOf("全部","早餐","中餐","晚餐","宵夜"));

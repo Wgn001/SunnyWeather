@@ -4,18 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
+        android:id="@+id/btn_recommend1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="筛选"/>
     <Button
+        android:id="@+id/btn_recommend2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="筛选"/>
     <Button
+        android:id="@+id/btn_recommend3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="筛选"/>
     <Button
+        android:id="@+id/btn_recommend4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="筛选"/>

@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sunnyweather.R
 import com.jay.widget.StickyHeaders
@@ -25,10 +28,17 @@ class ShopAdapter(private val context: Context,private val list:List<String>) : 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        when(holder){
+            is RecommendViewHolder ->
+                    holder.recommend1.setOnClickListener {
+                    }
+            is HeadViewHolder ->
+                    holder as HeadViewHolder
+        }
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return list?.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -42,10 +52,14 @@ class ShopAdapter(private val context: Context,private val list:List<String>) : 
     }
 
 
-
     class ViewHolder(view :View):RecyclerView.ViewHolder(view)
 
-    class RecommendViewHolder(view:View):RecyclerView.ViewHolder(view)
+    class RecommendViewHolder(view:View):RecyclerView.ViewHolder(view){
+        val recommend1:Button=view.findViewById(R.id.btn_recommend1)
+        val recommend2:Button=view.findViewById(R.id.btn_recommend2)
+        val recommend3:Button=view.findViewById(R.id.btn_recommend3)
+    }
+
 
     class HeadViewHolder(view:View):RecyclerView.ViewHolder(view)
 
