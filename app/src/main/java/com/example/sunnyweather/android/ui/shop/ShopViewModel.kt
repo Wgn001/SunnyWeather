@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 
 class ShopViewModel :ViewModel(){
 
+    //recyclerView 的List
     private val recommend=MutableLiveData<Int>()
 
+    //转换
     val recommendLiveData=Transformations.map(recommend){count ->
         getRecommend(count)
     }
