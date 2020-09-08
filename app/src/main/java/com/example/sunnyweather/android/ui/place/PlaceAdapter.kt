@@ -46,14 +46,13 @@ class PlaceAdapter(private val fragment:PlaceFragment,private val placeList:List
                 }
                 fragment.startActivity(intent)
                 fragment.activity?.finish()
-
             }
             fragment.viewModel.savePlace(place)
         }
         return  holder
     }
 
-    inner class ViewHolder(view: View) :RecyclerView.ViewHolder(view){
+     class ViewHolder(view: View) :RecyclerView.ViewHolder(view){
         val palceName:TextView =view.findViewById(R.id.placeName)
         val placeAddress:TextView=view.findViewById(R.id.placeAddress)
     }

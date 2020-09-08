@@ -31,11 +31,11 @@ class ShopFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val layoutManager=StickyHeadersLinearLayoutManager<ShopAdapter>(activity)
-        adapter=ShopAdapter(this,shopViewModel.recommendList)
+        adapter=ShopAdapter(this,shopViewModel)
         recyclerView.layoutManager=layoutManager
         recyclerView.adapter=adapter
         swipeRefresh.setOnRefreshListener {
-            shopViewModel.changeRecommend("1")
+            shopViewModel.changeRecommend(20)
             swipeRefresh.isRefreshing=false
         }
     }

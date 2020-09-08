@@ -7,19 +7,23 @@ import androidx.lifecycle.ViewModel
 
 class ShopViewModel :ViewModel(){
 
-    private val recommend=MutableLiveData<String>()
+    private val recommend=MutableLiveData<Int>()
 
-    val recommendLiveData=Transformations.map(recommend){
-        getRecommend()
+    val recommendLiveData=Transformations.map(recommend){count ->
+        getRecommend(count)
     }
 
     val recommendList=ArrayList<String>()
 
-    fun getRecommend():List<String>{
-        return listOf<String>("","","")
+    fun getRecommend(count :Int):List<String>{
+        val lists=ArrayList<String>()
+        for (i in 0..count){
+            lists.add("")
+        }
+        return lists
     }
 
-    fun changeRecommend(query:String){
-        recommend.value=query
+    fun changeRecommend(count:Int){
+        recommend.value=count
     }
 }
