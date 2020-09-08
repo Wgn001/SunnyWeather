@@ -18,14 +18,19 @@ class PlaceViewModel : ViewModel() {
     //注册ViewModel
     private val searchLiveData =MutableLiveData<String>()
 
+    //RecyclerView数据源
     val placelist=ArrayList<Place>()
 
+    //转换数据类型,searchLiveData监听时时Observable
     val placeLiveData =Transformations.switchMap(searchLiveData){   query->
             Repository.searchPlaces(query)
         }
 
+    /**
+     * 搜索
+     */
     fun searchPlaces(query :String){
-        searchLiveData.value=query;
+        searchLiveData.value=query
     }
 
 }

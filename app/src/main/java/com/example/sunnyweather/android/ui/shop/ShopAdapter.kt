@@ -12,11 +12,11 @@ import com.example.sunnyweather.R
 import com.jay.widget.StickyHeaders
 
 
-class ShopAdapter(private val context: Context,private val list:List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() ,StickyHeaders {
+class ShopAdapter(private val  fragment:Fragment,private val list:ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() ,StickyHeaders {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        var view =LayoutInflater.from(context).inflate(viewType,parent,false)
+        var view =LayoutInflater.from(fragment.context).inflate(viewType,parent,false)
         var viewHolder:RecyclerView.ViewHolder
        when(viewType){
            0 -> viewHolder=HeadViewHolder(view)
@@ -29,9 +29,9 @@ class ShopAdapter(private val context: Context,private val list:List<String>) : 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when(holder){
-            is RecommendViewHolder ->
-                    holder.recommend1.setOnClickListener {
-                    }
+            is RecommendViewHolder ->{
+
+            }
             is HeadViewHolder ->
                     holder as HeadViewHolder
         }

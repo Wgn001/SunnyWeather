@@ -46,9 +46,11 @@ class PlaceFragment : Fragment() {
             return
         }
         val layoutManager=LinearLayoutManager(activity)
-        recyclerView.layoutManager=layoutManager;
+        recyclerView.layoutManager=layoutManager
         adapter= PlaceAdapter(this,viewModel.placelist)
         recyclerView.adapter=adapter
+
+        //监听输入框
         searchPlaceEdit.addTextChangedListener { editable->
             val content =editable.toString()
             if (content.isNotEmpty()){
