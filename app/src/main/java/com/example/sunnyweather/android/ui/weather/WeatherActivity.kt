@@ -3,10 +3,14 @@ package com.example.sunnyweather.android.ui.weather
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -36,6 +40,37 @@ class WeatherActivity : AppCompatActivity() {
         val decorView=window.decorView
         decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         window.statusBarColor= Color.TRANSPARENT
+
+//        decorView as ViewGroup
+//        for (i in 0 until decorView.childCount){
+//            val childview=decorView.getChildAt(i)
+//            if (childview is ImageView){
+//                val paint=Paint()
+//                val colorMatrix=ColorMatrix(
+//                    floatArrayOf(
+//                        -1f, 0f, 0f, 0f, 255f,
+//                        0f, -1f, 0f, 0f, 255f,
+//                        0f, 0f, -1f, 0f, 255f,
+//                        0f, 0f, 0f, 1f, 0f
+//                    )
+//                )
+//                paint.setColorFilter(ColorMatrixColorFilter(colorMatrix))
+//                childview.setLayerType(View.LAYER_TYPE_HARDWARE,paint)
+//            }else{
+//                val paint= Paint()
+//                val colorMatrix=ColorMatrix(
+//                    floatArrayOf(
+//                        1f, 0f, 0f, 0f, 0f,
+//                        0f, 1f, 0f, 0f, 0f,
+//                        0f, 0f, 0.7f, 0f, 0f,
+//                        0f, 0f, 0f, 1f, 0f
+//                    )
+//                )
+//                paint.setColorFilter(ColorMatrixColorFilter(colorMatrix))
+//                childview.setLayerType(View.LAYER_TYPE_HARDWARE,paint)
+//            }
+//        }
+
         setContentView(R.layout.activity_weather)
         if (viewModel.locationLng.isEmpty()){
             viewModel.locationLng=intent.getStringExtra("location_lng") ?:""
